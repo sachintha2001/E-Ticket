@@ -1,20 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { AuthService } from '../services/auth';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthService);
-  const token = authService.getToken();
-
-  // Clone the request and add the Authorization header if a token exists
-  if (token) {
-    const clonedReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return next(clonedReq);
-  }
-
+  // We are now using Firebase SDK for database calls which handles auth internally.
+  // If you add a custom REST API later, you can get the token from Firebase Auth here.
   return next(req);
 };

@@ -143,11 +143,13 @@ export class Checkout implements OnInit {
       const hashString = merchantId + orderId + amountFormatted + currency + hashedSecret;
       const hash = CryptoJS.MD5(hashString).toString().toUpperCase();
 
+      const currentDomain = window.location.origin;
+
       const payment = {
         "sandbox": true, 
         "merchant_id": merchantId,
-        "return_url": "http://localhost:4200/checkout", 
-        "cancel_url": "http://localhost:4200/checkout",
+        "return_url": `${currentDomain}/checkout`, 
+        "cancel_url": `${currentDomain}/checkout`,
         "notify_url": "http://api.yourdomain.com/payhere-notify", 
         "order_id": orderId,
         "items": `Live Rock Concert - ${this.ticketQuantity} Tickets`,

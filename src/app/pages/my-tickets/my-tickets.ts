@@ -13,7 +13,7 @@ interface PurchasedTicket {
   location: string;
   quantity: number;
   isScanned?: boolean;
-  qrData?: string;
+  qrData: string;
 }
 
 @Component({
