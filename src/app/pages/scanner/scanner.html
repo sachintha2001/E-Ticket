@@ -1,0 +1,64 @@
+<div class="scanner-container">
+  <div class="header-section">
+    <h2>Gate Scanner 📹</h2>
+    <p>Scan attendee QR codes to validate entry.</p>
+  </div>
+
+  <div class="scanner-card glass-card">
+    
+    <!-- Camera Viewfinder -->
+    <div class="viewfinder" [ngClass]="scanStatus">
+      <zxing-scanner
+        (camerasFound)="onCamerasFound($event)"
+        (permissionResponse)="onHasPermission($event)"
+        (scanSuccess)="handleQrCodeResult($event)">
+      </zxing-scanner>
+      
+      <!-- Overlay Frame -->
+      <div class="overlay-frame">
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+      </div>
+    </div>
+
+    <!-- Status Messages -->
+    <div class="status-panel">
+      <!-- Waiting -->
+      <div class="status-message waiting" *ngIf="scanStatus === 'idle'">
+        <div class="icon">📷</div>
+        <h4>Point Camera at QR Code</h4>
+      </div>
+
+      <!-- Success -->
+      <div class="status-message success" *ngIf="scanStatus === 'success'">
+        <div class="icon">✅</div>
+        <h4>Access Granted</h4>
+        <p>Ticket ID: {{ parsedData?.ticketId }}</p>
+        <p class="seats-info">{{ parsedData?.seats }} Ticket(s) Validated</p>
+      </div>
+
+      <!-- Already Scanned -->
+      <div class="status-message warning" *ngIf="scanStatus === 'already_scanned'">
+        <div class="icon">⚠️</div>
+        <h4>Already Scanned</h4>
+        <p>This ticket has already been used to enter.</p>
+        <p>Ticket ID: {{ parsedData?.ticketId }}</p>
+      </div>
+
+      <!-- Error / Invalid -->
+      <div class="status-message error" *ngIf="scanStatus === 'error'">
+        <div class="icon">❌</div>
+        <h4>Invalid Ticket</h4>
+        <p>This QR code is not recognized by the system.</p>
+      </div>
+    </div>
+
+    <!-- Permission warnings -->
+    <div class="permission-warning" *ngIf="hasPermission === false">
+      <p>Please allow camera access to scan tickets.</p>
+    </div>
+    
+  </div>
+</div>

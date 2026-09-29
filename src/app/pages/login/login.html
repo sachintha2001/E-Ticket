@@ -1,0 +1,48 @@
+<div class="login-container">
+  <div class="login-card glass-card">
+    <div class="login-header">
+      <h2>{{ isLoginMode ? 'Welcome Back 👋' : 'Create Account ✨' }}</h2>
+      <p>{{ isLoginMode ? 'Sign in to access your tickets.' : 'Sign up to start buying tickets.' }}</p>
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          class="form-control" 
+          formControlName="email" 
+          placeholder="Enter your email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          class="form-control" 
+          formControlName="password" 
+          placeholder="Enter your password (min 6 chars)">
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="authForm.invalid || isLoading">
+        <span *ngIf="!isLoading">{{ isLoginMode ? 'Sign In' : 'Sign Up' }}</span>
+        <span *ngIf="isLoading" class="spinner">⏳ Processing...</span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>
+        {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
+        <button type="button" class="btn-link" (click)="toggleMode()">
+          {{ isLoginMode ? 'Sign Up' : 'Sign In' }}
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

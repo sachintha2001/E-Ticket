@@ -1,0 +1,141 @@
+.my-tickets-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .header-section {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    p {
+      color: var(--text-secondary);
+    }
+  }
+
+  .tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .ticket-card {
+    display: flex;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(to bottom, #a855f7, #ec4899);
+    }
+
+    .ticket-info {
+      flex: 1;
+      padding: 2rem 2.5rem;
+      border-right: 2px dashed rgba(255, 255, 255, 0.1);
+
+      .event-name {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .info-row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .label {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 0.25rem;
+        }
+
+        .value {
+          font-size: 1.1rem;
+          font-weight: 500;
+
+          &.highlighted {
+            color: #10b981;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .qr-section {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.02);
+      min-width: 250px;
+
+      .qr-code-wrapper {
+        background: white;
+        padding: 10px;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .scan-text {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 5rem 0;
+    
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .ticket-card {
+    flex-direction: column;
+    
+    .ticket-info {
+      border-right: none;
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+    }
+  }
+}

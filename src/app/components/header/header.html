@@ -1,0 +1,22 @@
+<header class="header">
+  <div class="logo">
+    <a routerLink="/">🎟️ TicketFlow</a>
+  </div>
+  <nav class="nav-links">
+    <ul>
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+      <li><a routerLink="/my-tickets" routerLinkActive="active">My Tickets</a></li>
+      <li><a routerLink="/scan" routerLinkActive="active">Scan Tickets (Admin)</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <ng-container *ngIf="authService.currentUser() as user">
+      <span class="user-email">{{ user.email }}</span>
+      <button class="btn btn-outline" (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-container *ngIf="!authService.currentUser()">
+      <button class="btn btn-outline" routerLink="/login">Login / Sign Up</button>
+    </ng-container>
+  </div>
+</header>

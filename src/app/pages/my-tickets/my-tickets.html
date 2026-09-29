@@ -1,0 +1,64 @@
+<div class="my-tickets-container">
+  <div class="header-section">
+    <h2>My Tickets 🎫</h2>
+    <p>Present the QR code at the entrance of the event.</p>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <p>Loading your tickets...</p>
+  </div>
+
+  <ng-container *ngIf="!isLoading">
+    <div class="tickets-list" *ngIf="tickets.length > 0; else noTickets">
+    <div class="glass-card ticket-card" *ngFor="let ticket of tickets">
+      
+      <!-- Event Info Side -->
+      <div class="ticket-info">
+        <h3 class="event-name">{{ ticket.eventName }}</h3>
+        
+        <div class="info-row">
+          <span class="label">Date & Time</span>
+          <span class="value">{{ ticket.date }} | {{ ticket.time }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="label">Location</span>
+          <span class="value">{{ ticket.location }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="label">Ticket ID</span>
+          <span class="value">{{ ticket.id }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="label">Quantity</span>
+          <span class="value highlighted">{{ ticket.quantity }} Ticket(s)</span>
+        </div>
+      </div>
+
+      <!-- QR Code Side -->
+      <div class="qr-section">
+        <div class="qr-code-wrapper">
+          <qrcode 
+            [qrdata]="ticket.qrData" 
+            [width]="150" 
+            [errorCorrectionLevel]="'M'">
+          </qrcode>
+        </div>
+        <p class="scan-text">Scan at Entrance</p>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #noTickets>
+    <div class="empty-state">
+      <div class="icon">🎟️</div>
+      <h3>No tickets found</h3>
+      <p>You haven't purchased any tickets yet.</p>
+      <button class="btn btn-primary" routerLink="/dashboard">Browse Events</button>
+    </div>
+  </ng-template>
+  </ng-container>
+</div>

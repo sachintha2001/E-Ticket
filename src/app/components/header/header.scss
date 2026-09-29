@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links {
+    ul {
+      display: flex;
+      gap: 2rem;
+      
+      li a {
+        color: var(--text-secondary);
+        font-weight: 500;
+        transition: color 0.3s;
+
+        &:hover, &.active {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
